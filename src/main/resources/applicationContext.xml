@@ -4,5 +4,11 @@
 	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans 
 			http://www.springframework.org/schema/beans/spring-beans.xsd">
-	<bean id="tWalk" class="springProject.TransportationWalk" />
+	<!-- <bean id="tWalk" class="springProject.TransportationWalk" /> -->
+	<bean id="studentDao" class="ems.member.dao.StudentDao"></bean>
+	
+	<bean id="service" class="ems.member.service.StudentService">
+		<constructor-arg ref="studentDao"></constructor-arg>
+	</bean>
+	
 </beans>

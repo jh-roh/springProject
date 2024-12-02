@@ -5,6 +5,8 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
+import org.springframework.context.support.GenericXmlApplicationContext;
+
 import ems.member.Student;
 import ems.member.assembler.StudentAssembler;
 import ems.member.service.StudentService;
@@ -33,9 +35,15 @@ public class MainClass {
 			"French Language and Literature", "Philosophy", "History", 
 			"Law", "Statistics", "Computer", "Economics", "Public Administration"};
 
-		StudentAssembler assembler = new StudentAssembler();
+//		StudentAssembler assembler = new StudentAssembler();
 		
-		StudentService service = assembler.getStudentService();
+//		StudentService service = assembler.getStudentService();
+		
+		GenericXmlApplicationContext ctx = new GenericXmlApplicationContext("classpath:applicationContext.xml");
+		
+		
+		StudentService service = ctx.getBean("service", StudentService.class);
+		
 		
 		for (int j = 0; j < sNums.length; j++) {
 			Student student = new Student(sNums[j], sIds[j], sPws[j], sNames[j], 
