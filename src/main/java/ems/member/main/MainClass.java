@@ -1,14 +1,17 @@
 package ems.member.main;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
 import org.springframework.context.support.GenericXmlApplicationContext;
 
+import ems.member.DataBaseConnectionInfo;
 import ems.member.Student;
 import ems.member.assembler.StudentAssembler;
+import ems.member.service.EMSInformationService;
 import ems.member.service.StudentService;
 
 public class MainClass {
@@ -43,7 +46,22 @@ public class MainClass {
 		
 		
 		StudentService service = ctx.getBean("service", StudentService.class);
+		DataBaseConnectionInfo dbInfo = ctx.getBean("dataBaseConnectionInfoDev",DataBaseConnectionInfo.class);
 		
+		//의존성 주입
+		EMSInformationService emsInfo = ctx.getBean("informationService", EMSInformationService.class);
+		
+		List<String> developers = emsInfo.getDevelopers();
+		
+		/*
+		 * for (String item : developers) { System.out.println(item); }
+		 */		
+		developers.forEach(item -> System.out.println(item));
+		
+		
+		System.out.print("" + dbInfo.getJdbcUrl() + "\t");
+		System.out.print("" + dbInfo.getUserId() + "\t");
+		System.out.print("" + dbInfo.getUserPw() + "\t");
 		
 		for (int j = 0; j < sNums.length; j++) {
 			Student student = new Student(sNums[j], sIds[j], sPws[j], sNames[j], 
